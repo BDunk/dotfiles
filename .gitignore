@@ -1,0 +1,5 @@
+.emacs.d/bookmarks
+.emacs.d/auto-save-list
+.emacs.d/elpa
+.emacs.d/session*
+.emacs.d/*~
