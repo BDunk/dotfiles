@@ -1,3 +1,7 @@
+(setq org-refile-targets '((nil :maxlevel . 9)
+                                (org-agenda-files :maxlevel . 9)))
+(setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
+(setq org-refile-use-outline-path t)                  ; Show full paths for refiling
 (setq org-agenda-files '("~/Dropbox"))
 (global-set-key "\C-ca" 'org-agenda)
 (setq org-refile-use-outline-path 'file)
@@ -7,24 +11,34 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(org-modules
-   '(ol-bbdb ol-bibtex ol-docview ol-eww ol-gnus org-habit ol-info ol-irc ol-mhe ol-rmail ol-w3m)))
+   (quote
+    (ol-bbdb ol-bibtex ol-docview ol-eww ol-gnus org-habit ol-info ol-irc ol-mhe ol-rmail ol-w3m)))
+ '(org-scheduled-past-days 0))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-(setq org-refile-targets '(("~/Dropbox/projects.org" :maxlevel . 2)
-                           ("~/Dropbox/tickler.org" :maxlevel . 2)
-                           ("~/Dropbox/someday.org" :maxlevel . 2)))
 (setq org-tag-alist '((:startgroup . nil)
-		      ("@work" . ?w)
-		      ("@home" . ?h)
-                      ("@school" . ?s)
-		      ("@out" . ?o)
+		      ("@WORK" . ?w)
+		      ("@HOME" . ?h)
+                      ("@SCHOOL" . ?s)
+		      ("@OUT" . ?o)
 		      (:endgroup . nil)
-		      
-                      ("computer" . ?c)
-		      ("physical" . ?p)
-		      ("thinking" . ?t)
+
+		      (:startgroup . nil)
+                      ("COMPUTER" . ?c)
+		      ("PHYSICAL" . ?p)
+		      ("THINKING" . ?t)
+		      (:endgroup . nil)
+
+		      (:startgroup . nil)
+		      ("SCHEDULED" . ?q)
+		      ("SOMEDAY" . ?a)
+		      (:endgroup . nil)
 		      ))
+(setq org-agenda-custom-commands
+      '(
+	("q" ((agenda "") (tags-todo "-SCHEDULED-SOMEDAY")))
+	))
